@@ -17,6 +17,20 @@ html {
   min-height: 100%;
 }
 
+header {
+    background-color: #CBC3E3;
+}
+
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #add8e6;
+}
+
+footer {
+    background-color: #F6BE00;
+    color: black;
+}
+
+.RightAlign {
+    margin-left: auto;
 }
