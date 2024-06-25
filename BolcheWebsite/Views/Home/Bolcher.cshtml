@@ -4,3 +4,34 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Her er vores Bolche Menu</p>
+@model IEnumerable<BolcheWebsite.SQLModels.BolcheView>
+
+<button id="toggleON" onclick="toggleON(`BolcheTabel`)">Vis Alle</button>
+<button id="toggleOFF" onclick="toggleOFF(`BolcheTabel`)">Skjul Alle</button>
+<table id="BolcheTabel">
+    <thead>
+        <tr>
+            <th>Bolche Navn</th>
+            <th>Farve</th>
+            <th>Surhed</th>
+            <th>Styrke</th>
+            <th>Smag</th>
+            <th>Pris</th>
+            <th>Vægt</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BolcheNavn</td>
+                <td>@item.Farve</td>
+                <td>@item.Surhed</td>
+                <td>@item.Styrke</td>
+                <td>@item.Smag</td>
+                <td>@item.Pris</td>
+                <td>@item.Vægt</td>
+            </tr>
+        }
+    </tbody>
+</table>

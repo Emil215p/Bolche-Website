@@ -1,16 +1,22 @@
 using BolcheWebsite.Models;
+using BolcheWebsite.SQLContext;
+using BolcheWebsite.SQLModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Linq;
 
 namespace BolcheWebsite.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly BolcherContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BolcherContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -20,7 +26,8 @@ namespace BolcheWebsite.Controllers
 
         public IActionResult Bolcher()
         {
-            return View();
+            var bolcheViewData = _context.Set<BolcheView>().ToList();
+            return View(bolcheViewData);
         }
         
         public IActionResult Privacy()

@@ -2,3 +2,12 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+    function toggleON(elementId) {
+      const element = document.getElementById(elementId);
+    element.style.display = "block";
+    }
+
+    function toggleOFF(elementId) {
+      const element = document.getElementById(elementId);
+    element.style.display = "none";
+    }

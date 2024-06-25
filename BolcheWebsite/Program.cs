@@ -1,9 +1,15 @@
 using Microsoft.EntityFrameworkCore;
+using BolcheWebsite.SQLContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register the DbContext
+builder.Services.AddDbContext<BolcherContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BolcherConn")));
+
 
 var app = builder.Build();
 
