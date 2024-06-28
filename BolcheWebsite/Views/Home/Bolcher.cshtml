@@ -5,7 +5,10 @@
 
 <p>Her er vores Bolche Menu</p>
 @model IEnumerable<BolcheWebsite.SQLModels.BolcheView>
-
+<i class="lni lni-search"></i>
+<input type="text" id="myInput" onkeyup="SearchByLetter()" placeholder="Søg efter navn...">
+<button id="SearchForLetterShift" onclick="SearchForLetterShift()">Søg efter startbogstav.</button>
+<button id="SearchForGeneralShift" onclick="SearchForGeneralShift()">Søg generelt.</button>
 <button id="toggleON" onclick="toggleON(`BolcheTabel`)">Vis Alle</button>
 <button id="toggleOFF" onclick="toggleOFF(`BolcheTabel`)">Skjul Alle</button>
 <table id="BolcheTabel">
