@@ -1,69 +1,55 @@
-﻿    function toggleON(elementId) {
-      const element = document.getElementById(elementId);
-    element.style.display = "block";
+﻿let currentSearchMode = 'none'; // Search mode is set to none by default.
+function toggleON() {
+    document.getElementById("BolcheTabel").style.display = "block";
 }
 
-//function toggleON() {
-//    let table = document.getElementById('BolcheTabel');
-//    let tr = table.getElementsByTagName('tr');
-
-//    for (let i = 1; i < tr.length; i++) { // Start from 1 to skip the header row
-//        let td = tr[i].getElementsByTagName('td')[0];
-//        tr[i].style.display = "";
-//    }
-//}
-
-    function toggleOFF(elementId) {
-      const element = document.getElementById(elementId);
-    element.style.display = "none";
+    function toggleOFF() {
+        document.getElementById("BolcheTabel").style.display = "none";
 }
 
 function SearchForLetterShift() {
-    currentFunction = newFunction;
-    alert("Function changed!");
+    currentSearchMode = 'letter';
+    alert("Search mode changed to initial letter!");
 }
-    function SearchForGeneralShift() {
-        currentFunction = newFunction;
-        alert("Function changed!");
-    }
+
+function SearchForGeneralShift() {
+    currentSearchMode = 'general';
+    alert("Search mode changed to general search!");
+}
+
+function SetColor() {
+    alert("Not implemented yet.");
+}
+
 function SearchThing() {
-    // First, we need to declare our variables
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("BolcheTabel");
-    tr = table.getElementsByTagName("tr");
+    const input = document.getElementById("myInput");
+    const filter = input.value.toUpperCase();
+    const table = document.getElementById("BolcheTabel");
+    const tr = table.getElementsByTagName("tr");
 
-    // Then, we need to Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
-
-function SearchByLetter() {
-    document.getElementById('myInput').addEventListener('input', function () {
-        let filter = this.value.toUpperCase();
-        let table = document.getElementById('BolcheTabel');
-        let tr = table.getElementsByTagName('tr');
-
-        for (let i = 1; i < tr.length; i++) { // Start from 1 to skip the header row
-            let td = tr[i].getElementsByTagName('td')[0]; // Assuming you want to filter by the first column
+        for (let i = 0; i < tr.length; i++) {
+            const td = tr[i].getElementsByTagName("td")[0];
             if (td) {
-                let txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().startsWith(filter)) {
-                    tr[i].style.display = "";
+                const txtValue = td.textContent || td.innerText;
+                if (currentSearchMode === 'letter') {
+                    if (txtValue.toUpperCase().startsWith(filter)) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
                 } else {
-                    tr[i].style.display = "none";
+                    tr[i].style.display = "";
+                }
+                if (currentSearchMode === 'general') {
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
                 }
             }
-        }
-    });
-}
+    }
+    if (currentSearchMode === 'none') {
+        alert("Vælg søgekriterier eller klik på Vis alle.");
+    }
+    }

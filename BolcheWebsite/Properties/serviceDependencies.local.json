@@ -6,9 +6,9 @@
     "mssql1": {
       "serviceConnectorResourceId": "",
       "secretStore": "LocalSecretsFile",
+      "resourceId": null,
       "type": "mssql.onprem",
-      "connectionId": "BolcherConn",
-      "dynamicId": null
+      "connectionId": "BolcherConn"
     }
   }
 }

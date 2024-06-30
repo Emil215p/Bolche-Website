@@ -6,12 +6,22 @@
 <p>Her er vores Bolche Menu</p>
 @model IEnumerable<BolcheWebsite.SQLModels.BolcheView>
 <i class="lni lni-search"></i>
-<input type="text" id="myInput" onkeyup="SearchByLetter()" placeholder="Søg efter navn...">
+<button id="SearchButton" onclick="SearchThing()">Søg</button>
+<input type="text" id="myInput" placeholder="Søg efter navn...">
 <button id="SearchForLetterShift" onclick="SearchForLetterShift()">Søg efter startbogstav.</button>
 <button id="SearchForGeneralShift" onclick="SearchForGeneralShift()">Søg generelt.</button>
-<button id="toggleON" onclick="toggleON(`BolcheTabel`)">Vis Alle</button>
-<button id="toggleOFF" onclick="toggleOFF(`BolcheTabel`)">Skjul Alle</button>
-<table id="BolcheTabel">
+<button id="toggleON" onclick="toggleON()">Vis Alle</button>
+<button id="toggleOFF" onclick="toggleOFF()">Skjul Alle</button>
+<label>Farve:
+<select name="colors" placeholder="Vælg Farve" id="colors" onchange="SetColor()" onfocus="this.selectedIndex = -1">
+    <option value="" disabled selected>Vælg Farve</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.Farve">@item.Farve</option>
+    }
+</select>
+</label>
+<table id="BolcheTabel" style="display: none;">
     <thead>
         <tr>
             <th>Bolche Navn</th>

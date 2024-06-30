@@ -5,8 +5,7 @@
     },
     "mssql1": {
       "type": "mssql",
-      "connectionId": "BolcherConn",
-      "dynamicId": null
+      "connectionId": "BolcherConn"
     }
   }
 }
