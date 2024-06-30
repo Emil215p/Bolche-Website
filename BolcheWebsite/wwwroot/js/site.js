@@ -5,17 +5,27 @@
     function toggleON(elementId) {
       const element = document.getElementById(elementId);
     element.style.display = "block";
-    }
+}
+
+//function toggleON() {
+//    let table = document.getElementById('BolcheTabel');
+//    let tr = table.getElementsByTagName('tr');
+
+//    for (let i = 1; i < tr.length; i++) { // Start from 1 to skip the header row
+//        let td = tr[i].getElementsByTagName('td')[0];
+//        tr[i].style.display = "";
+//    }
+//}
 
     function toggleOFF(elementId) {
       const element = document.getElementById(elementId);
     element.style.display = "none";
 }
 
-    function SearchForLetterShift() {
+function SearchForLetterShift() {
     currentFunction = newFunction;
     alert("Function changed!");
-
+}
     function SearchForGeneralShift() {
         currentFunction = newFunction;
         alert("Function changed!");
