@@ -2,10 +2,6 @@
     ViewData["Title"] = "Birgers Bolcher";
 }
 <h1>@ViewData["Title"]</h1>
-@{
-    ViewData["Title"] = "Birgers Bolcher";
-}
-<h1>@ViewData["Title"]</h1>
 <script>
     var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView));
 </script>
@@ -32,10 +28,11 @@
             <th>Surhed</th>
             <th>Styrke</th>
             <th>Smag</th>
-            <th>Råvare Pris</th>
+            <th>Råvare Pris (øre)</th>
             <th>Vægt</th>
-            <th>Netto Pris</th>
-            <th>Pris</th>
+            <th>Netto Pris (øre)</th>
+            <th>Pris (øre)</th>
+            <th>Pris (100g) (øre)</th>
         </tr>
     </thead>
     <tbody>
@@ -43,6 +40,7 @@
         {
             var nettoPris = Model.NettoPris.FirstOrDefault(n => n.Price == item.Pris);
             var totalPris = Model.TotalPris.FirstOrDefault(t => t.Price == item.Pris);
+            var hundredgramPris = Model.HundredGramPris.FirstOrDefault(h => h.Price == item.Pris);
 
             <tr>
                 <td>@item.BolcheNavn</td>
@@ -54,6 +52,7 @@
                 <td>@item.Vægt</td>
                 <td>@nettoPris?.Output</td>
                 <td>@totalPris?.Output</td>
+                <td>@hundredgramPris?.Output</td>
             </tr>
         }
     </tbody>

@@ -13,5 +13,5 @@ public partial class Cart
 
     public virtual Bolcher Bolche { get; set; } = null!;
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

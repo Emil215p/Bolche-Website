@@ -5,7 +5,7 @@ namespace BolcheWebsite.SQLModels;
 
 public partial class HundredGramPri
 {
-    public string Name { get; set; } = null!;
+    public decimal Price { get; set; }
 
-    public decimal? HundredGramPris { get; set; }
+    public decimal? Output { get; set; }
 }

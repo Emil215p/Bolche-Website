@@ -9,11 +9,9 @@ public partial class Order
 
     public int? CustomerId { get; set; }
 
-    public int CartId { get; set; }
-
     public DateTime OrderDate { get; set; }
 
-    public virtual Cart Cart { get; set; } = null!;
-
     public virtual Customer? Customer { get; set; }
+
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

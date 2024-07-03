@@ -30,7 +30,8 @@ namespace BolcheWebsite.Controllers
             {
                 BolcheView = _context.Set<BolcheView>().ToList(),
                 NettoPris = _context.Set<NettoPri>().ToList(),
-                TotalPris = _context.Set<TotalPri>().ToList()
+                TotalPris = _context.Set<TotalPri>().ToList(),
+                HundredGramPris = _context.Set<HundredGramPri>().ToList()
             };
 
             return View(combinationModel);
