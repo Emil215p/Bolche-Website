@@ -42,7 +42,7 @@ namespace BolcheWebsite.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult KundeInfo()
         {
             return View();
         }
