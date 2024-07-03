@@ -15,7 +15,7 @@ public partial class BolcheView
 
     public string? Smag { get; set; }
 
-    public int? Pris { get; set; }
+    public decimal? Pris { get; set; }
 
-    public int? Vægt { get; set; }
+    public decimal? Vægt { get; set; }
 }

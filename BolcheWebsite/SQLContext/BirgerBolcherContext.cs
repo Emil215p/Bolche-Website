@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BolcheWebsite.SQLContext;
 
-public partial class BolcherContext : DbContext
+public partial class BirgerBolcherContext : DbContext
 {
-    public BolcherContext()
+    public BirgerBolcherContext()
     {
     }
 
-    public BolcherContext(DbContextOptions<BolcherContext> options)
+    public BirgerBolcherContext(DbContextOptions<BirgerBolcherContext> options)
         : base(options)
     {
     }
@@ -24,29 +24,24 @@ public partial class BolcherContext : DbContext
 
     public virtual DbSet<BolcheView> BolcheViews { get; set; }
 
-    public virtual DbSet<BolcheViewMediocre> BolcheViewMediocres { get; set; }
-
-    public virtual DbSet<BolcheViewMid> BolcheViewMids { get; set; }
-
     public virtual DbSet<Bolcher> Bolchers { get; set; }
 
     public virtual DbSet<Cart> Carts { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
 
-    public virtual DbSet<DebugBolcheView> DebugBolcheViews { get; set; }
+    public virtual DbSet<HundredGramPri> HundredGramPris { get; set; }
+
+    public virtual DbSet<NettoPri> NettoPris { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<ShippingInfo> ShippingInfos { get; set; }
 
-    public virtual DbSet<Test1> Test1s { get; set; }
-
-    public virtual DbSet<Test2> Test2s { get; set; }
+    public virtual DbSet<TotalPri> TotalPris { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=192.168.15.83;Initial Catalog=Bolcher;User ID=emil215p;Password=Syddanskzgyyfmgy!12;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Name=BolcherConn");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -68,7 +63,7 @@ public partial class BolcherContext : DbContext
 
         modelBuilder.Entity<BolcheTraitName>(entity =>
         {
-            entity.HasKey(e => e.TraitNameId).HasName("PK__BolcheTr__757A478A09311987");
+            entity.HasKey(e => e.TraitNameId).HasName("PK__BolcheTr__757A478AFD0B46A2");
 
             entity.Property(e => e.TraitNameId).HasColumnName("TraitNameID");
             entity.Property(e => e.TraitNames).HasMaxLength(255);
@@ -76,7 +71,7 @@ public partial class BolcherContext : DbContext
 
         modelBuilder.Entity<BolcheTyper>(entity =>
         {
-            entity.HasKey(e => e.BolcheTypeId).HasName("PK__BolcheTy__32E53EF6D74A63C3");
+            entity.HasKey(e => e.BolcheTypeId).HasName("PK__BolcheTy__32E53EF60D5246EE");
 
             entity.ToTable("BolcheTyper");
 
@@ -100,52 +95,28 @@ public partial class BolcherContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("Bolche Navn");
             entity.Property(e => e.Farve).HasMaxLength(255);
+            entity.Property(e => e.Pris).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.Smag).HasMaxLength(255);
             entity.Property(e => e.Styrke).HasMaxLength(255);
             entity.Property(e => e.Surhed).HasMaxLength(255);
-        });
-
-        modelBuilder.Entity<BolcheViewMediocre>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("BolcheViewMediocre");
-
-            entity.Property(e => e.BolcheNavn)
-                .HasMaxLength(255)
-                .HasColumnName("Bolche Navn");
-            entity.Property(e => e.BolcheTrait)
-                .HasMaxLength(4000)
-                .HasColumnName("Bolche Trait");
-        });
-
-        modelBuilder.Entity<BolcheViewMid>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("BolcheViewMid");
-
-            entity.Property(e => e.BolcheNavn)
-                .HasMaxLength(255)
-                .HasColumnName("Bolche Navn");
-            entity.Property(e => e.BolcheTrait)
-                .HasMaxLength(255)
-                .HasColumnName("Bolche Trait");
+            entity.Property(e => e.Vægt).HasColumnType("decimal(10, 2)");
         });
 
         modelBuilder.Entity<Bolcher>(entity =>
         {
-            entity.HasKey(e => e.BolcheId).HasName("PK__Bolcher__2BA201E04217194F");
+            entity.HasKey(e => e.BolcheId).HasName("PK__Bolcher__2BA201E0C5AF6540");
 
             entity.ToTable("Bolcher");
 
             entity.Property(e => e.BolcheId).HasColumnName("BolcheID");
             entity.Property(e => e.Name).HasMaxLength(255);
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Weight).HasColumnType("decimal(10, 2)");
         });
 
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity.HasKey(e => e.CartId).HasName("PK__Cart__51BCD7972D93B07E");
+            entity.HasKey(e => e.CartId).HasName("PK__Cart__51BCD797ED912281");
 
             entity.ToTable("Cart");
 
@@ -160,9 +131,9 @@ public partial class BolcherContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B894B1A0F4");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B84DED2C57");
 
-            entity.HasIndex(e => e.Phone, "UQ__Customer__5C7E359E3DA75836").IsUnique();
+            entity.HasIndex(e => e.Phone, "UQ__Customer__5C7E359E9A86E88A").IsUnique();
 
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.Email).HasMaxLength(255);
@@ -176,30 +147,34 @@ public partial class BolcherContext : DbContext
                 .HasConstraintName("FK__Customers__Shipp__33D4B598");
         });
 
-        modelBuilder.Entity<DebugBolcheView>(entity =>
+        modelBuilder.Entity<HundredGramPri>(entity =>
         {
             entity
                 .HasNoKey()
-                .ToView("DebugBolcheView");
+                .ToView("HundredGramPris");
 
-            entity.Property(e => e.BolcheNavn)
-                .HasMaxLength(255)
-                .HasColumnName("Bolche Navn");
-            entity.Property(e => e.BolcheType)
-                .HasMaxLength(255)
-                .HasColumnName("Bolche Type");
-            entity.Property(e => e.TraitNames).HasMaxLength(255);
+            entity.Property(e => e.HundredGramPris).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Name).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<NettoPri>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("NettoPris");
+
+            entity.Property(e => e.Output).HasColumnType("numeric(13, 3)");
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF65A43A2E");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF870FB94A");
 
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.CartId).HasColumnName("CartID");
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.OrderDate).HasPrecision(3);
-            entity.Property(e => e.ShippingInfoId).HasColumnName("ShippingInfoID");
 
             entity.HasOne(d => d.Cart).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.CartId)
@@ -209,16 +184,11 @@ public partial class BolcherContext : DbContext
             entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.CustomerId)
                 .HasConstraintName("FK__Orders__Customer__36B12243");
-
-            entity.HasOne(d => d.ShippingInfo).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.ShippingInfoId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__Shipping__38996AB5");
         });
 
         modelBuilder.Entity<ShippingInfo>(entity =>
         {
-            entity.HasKey(e => e.ShippingInfoId).HasName("PK__Shipping__A72E5D952AC5C2FE");
+            entity.HasKey(e => e.ShippingInfoId).HasName("PK__Shipping__A72E5D95E579290B");
 
             entity.ToTable("ShippingInfo");
 
@@ -227,35 +197,14 @@ public partial class BolcherContext : DbContext
             entity.Property(e => e.City).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<Test1>(entity =>
+        modelBuilder.Entity<TotalPri>(entity =>
         {
             entity
                 .HasNoKey()
-                .ToView("Test 1");
+                .ToView("TotalPris");
 
-            entity.Property(e => e.BolcheNavn)
-                .HasMaxLength(255)
-                .HasColumnName("Bolche Navn");
-            entity.Property(e => e.BolcheTrait)
-                .HasMaxLength(255)
-                .HasColumnName("Bolche Trait");
-            entity.Property(e => e.TraitName2)
-                .HasMaxLength(255)
-                .HasColumnName("Trait Name 2");
-        });
-
-        modelBuilder.Entity<Test2>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToView("Test2");
-
-            entity.Property(e => e.BolcheNavn)
-                .HasMaxLength(255)
-                .HasColumnName("Bolche Navn");
-            entity.Property(e => e.BolcheTrait)
-                .HasMaxLength(4000)
-                .HasColumnName("Bolche Trait");
+            entity.Property(e => e.Output).HasColumnType("numeric(17, 5)");
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
         });
 
         OnModelCreatingPartial(modelBuilder);

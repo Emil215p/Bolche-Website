@@ -9,9 +9,9 @@ public partial class Bolcher
 
     public string Name { get; set; } = null!;
 
-    public int Weight { get; set; }
+    public decimal Weight { get; set; }
 
-    public int Price { get; set; }
+    public decimal Price { get; set; }
 
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 }

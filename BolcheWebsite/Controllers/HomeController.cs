@@ -11,9 +11,9 @@ namespace BolcheWebsite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly BolcherContext _context;
+        private readonly BirgerBolcherContext _context;
 
-        public HomeController(ILogger<HomeController> logger, BolcherContext context)
+        public HomeController(ILogger<HomeController> logger, BirgerBolcherContext context)
         {
             _logger = logger;
             _context = context;
@@ -26,10 +26,16 @@ namespace BolcheWebsite.Controllers
 
         public IActionResult Bolcher()
         {
-            var bolcheViewData = _context.Set<BolcheView>().ToList();
-            return View(bolcheViewData);
+            var combinationModel = new CombinationModel
+            {
+                BolcheView = _context.Set<BolcheView>().ToList(),
+                NettoPris = _context.Set<NettoPri>().ToList(),
+                TotalPris = _context.Set<TotalPri>().ToList()
+            };
+
+            return View(combinationModel);
         }
-        
+
         public IActionResult Privacy()
         {
             return View();

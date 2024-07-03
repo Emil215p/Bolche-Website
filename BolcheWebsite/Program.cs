@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Register the DbContext
-builder.Services.AddDbContext<BolcherContext>(options =>
+builder.Services.AddDbContext<BirgerBolcherContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BolcherConn")));
 
 
@@ -33,3 +33,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+    

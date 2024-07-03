@@ -2,11 +2,15 @@
     ViewData["Title"] = "Birgers Bolcher";
 }
 <h1>@ViewData["Title"]</h1>
+@{
+    ViewData["Title"] = "Birgers Bolcher";
+}
+<h1>@ViewData["Title"]</h1>
 <script>
-    var bolcheData = @Html.Raw(Json.Serialize(Model));
+    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView));
 </script>
 <p>Her er vores Bolche Menu</p>
-@model IEnumerable<BolcheWebsite.SQLModels.BolcheView>
+@model BolcheWebsite.SQLModels.CombinationModel
 <i class="lni lni-search"></i>
 <button id="SearchButton" onclick="SearchThing()">Søg</button>
 <input type="text" id="myInput" placeholder="Søg efter navn...">
@@ -14,10 +18,11 @@
 <button id="SearchForGeneralShift" onclick="SearchForGeneralShift()">Søg generelt.</button>
 <button id="toggleON" onclick="toggleON()">Vis Alle</button>
 <button id="toggleOFF" onclick="toggleOFF()">Skjul Alle</button>
-<label>Farve:
-<select name="colors" placeholder="Vælg Farve" id="colors" onchange="SetColor()">
-    <option value="" disabled selected>Vælg Farve</option>
-</select>
+<label>
+    Farve:
+    <select name="colors" placeholder="Vælg Farve" id="colors" onchange="SetColor()">
+        <option value="" disabled selected>Vælg Farve</option>
+    </select>
 </label>
 <table id="BolcheTabel" style="display: none;">
     <thead>
@@ -27,15 +32,18 @@
             <th>Surhed</th>
             <th>Styrke</th>
             <th>Smag</th>
-            <th>Råvareris</th>
+            <th>Råvare Pris</th>
             <th>Vægt</th>
-            <th>Nettopris</th>
+            <th>Netto Pris</th>
             <th>Pris</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.BolcheView)
         {
+            var nettoPris = Model.NettoPris.FirstOrDefault(n => n.Price == item.Pris);
+            var totalPris = Model.TotalPris.FirstOrDefault(t => t.Price == item.Pris);
+
             <tr>
                 <td>@item.BolcheNavn</td>
                 <td>@item.Farve</td>
@@ -44,7 +52,8 @@
                 <td>@item.Smag</td>
                 <td>@item.Pris</td>
                 <td>@item.Vægt</td>
-
+                <td>@nettoPris?.Output</td>
+                <td>@totalPris?.Output</td>
             </tr>
         }
     </tbody>

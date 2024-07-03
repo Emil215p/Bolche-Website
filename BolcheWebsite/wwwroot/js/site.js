@@ -1,6 +1,4 @@
-﻿console.log(bolcheData);
-
-let currentSearchMode = 'none'; // Search mode is set to none by default.
+﻿let currentSearchMode = 'none'; // Search mode is set to none by default.
 function toggleON() {
     document.getElementById("BolcheTabel").style.display = "block";
 }
