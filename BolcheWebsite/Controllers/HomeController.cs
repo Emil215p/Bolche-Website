@@ -8,16 +8,9 @@ using System.Linq;
 
 namespace BolcheWebsite.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(BirgerBolcherContext context) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly BirgerBolcherContext _context;
-
-        public HomeController(ILogger<HomeController> logger, BirgerBolcherContext context)
-        {
-            _logger = logger;
-            _context = context;
-        }
+        private readonly BirgerBolcherContext _context = context;
 
         public IActionResult Index()
         {
@@ -28,10 +21,10 @@ namespace BolcheWebsite.Controllers
         {
             var combinationModel = new CombinationModel
             {
-                BolcheView = _context.Set<BolcheView>().ToList(),
-                NettoPris = _context.Set<NettoPri>().ToList(),
-                TotalPris = _context.Set<TotalPri>().ToList(),
-                HundredGramPris = _context.Set<HundredGramPri>().ToList()
+                BolcheView = [.. _context.Set<BolcheView>()],
+                NettoPris = [.. _context.Set<NettoPri>()],
+                TotalPris = [.. _context.Set<TotalPri>()],
+                HundredGramPris = [.. _context.Set<HundredGramPri>()]
             };
 
             return View(combinationModel);
@@ -46,10 +39,10 @@ namespace BolcheWebsite.Controllers
         {
             var combinationModel = new CombinationModel
             {
-                BolcheView = _context.Set<BolcheView>().ToList(),
-                NettoPris = _context.Set<NettoPri>().ToList(),
-                TotalPris = _context.Set<TotalPri>().ToList(),
-                HundredGramPris = _context.Set<HundredGramPri>().ToList()
+                BolcheView = [.. _context.Set<BolcheView>()],
+                NettoPris = [.. _context.Set<NettoPri>()],
+                TotalPris = [.. _context.Set<TotalPri>()],
+                HundredGramPris = [.. _context.Set<HundredGramPri>()]
             };
 
             return View(combinationModel);
