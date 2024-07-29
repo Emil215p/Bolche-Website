@@ -104,15 +104,15 @@ const uniqueBolcher = {};
 
 // Filter out non-unique bolcher
 const filteredArrayNames = bolcheData.filter((bolche) => {
-    const bolchenavn = bolche.bolchenavn;
-    if (!uniqueBolcher[bolchenavn]) {
-        uniqueBolcher[bolchenavn] = true;
+    const name = bolche.bolchenavn;
+    if (!uniqueBolcher[name]) {
+        uniqueBolcher[name] = true;
         return true; // Include the first occurrence of each bolche
     }
     return false; // Exclude subsequent occurrences
 });
 
-function populateBolchersOptions() {
+function populateBolcherOptions() {
     const select = document.getElementById("bolchers");
     filteredArrayNames.forEach((bolche) => {
         const option = document.createElement("option");
@@ -122,4 +122,4 @@ function populateBolchersOptions() {
     });
 }
 
-populateBolchersOptions();
+populateBolcherOptions();
