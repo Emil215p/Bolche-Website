@@ -5030,7 +5030,8 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 			} else {
 				tmp = tmp || fragment.appendChild( context.createElement( "div" ) );
 
-				// Deserialize a standard representation
+				// De
+				a standard representation
 				tag = ( rtagName.exec( elem ) || [ "", "" ] )[ 1 ].toLowerCase();
 				wrap = wrapMap[ tag ] || wrapMap._default;
 				tmp.innerHTML = wrap[ 1 ] + jQuery.htmlPrefilter( elem ) + wrap[ 2 ];

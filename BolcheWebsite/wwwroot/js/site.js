@@ -96,4 +96,30 @@ function populateColorOptions() {
         select.appendChild(option);
     });
 }
+
 populateColorOptions();
+
+
+const uniqueBolcher = {};
+
+// Filter out non-unique bolcher
+const filteredArrayNames = bolcheData.filter((bolche) => {
+    const bolchenavn = bolche.bolchenavn;
+    if (!uniqueBolcher[bolchenavn]) {
+        uniqueBolcher[bolchenavn] = true;
+        return true; // Include the first occurrence of each bolche
+    }
+    return false; // Exclude subsequent occurrences
+});
+
+function populateBolchersOptions() {
+    const select = document.getElementById("bolchers");
+    filteredArrayNames.forEach((bolche) => {
+        const option = document.createElement("option");
+        option.value = bolche.bolchenavn;
+        option.text = bolche.bolchenavn;
+        select.appendChild(option);
+    });
+}
+
+populateBolchersOptions();

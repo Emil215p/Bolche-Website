@@ -2,5 +2,17 @@
     ViewData["Title"] = "Customer info";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h1>@ViewData["Title"]</h1>
+
+<script>
+    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView))
+</script>
 
 <h1>Se info om diverse ordre. Og Kunder</h1>
+@model BolcheWebsite.SQLModels.CombinationModel
+<label>
+    Bolcher:
+    <select name="bolchers" placeholder="Vælg bolche" id="bolchers" onchange="SetBolche()">
+        <option value="" disabled selected>Vælg bolche</option>
+    </select>
+</label>

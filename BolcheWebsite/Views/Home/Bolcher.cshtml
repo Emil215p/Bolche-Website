@@ -3,7 +3,7 @@
 }
 <h1>@ViewData["Title"]</h1>
 <script>
-    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView));
+    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView))
 </script>
 <p>Her er vores Bolche Menu</p>
 @model BolcheWebsite.SQLModels.CombinationModel

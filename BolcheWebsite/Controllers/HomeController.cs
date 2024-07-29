@@ -44,7 +44,15 @@ namespace BolcheWebsite.Controllers
 
         public IActionResult KundeInfo()
         {
-            return View();
+            var combinationModel = new CombinationModel
+            {
+                BolcheView = _context.Set<BolcheView>().ToList(),
+                NettoPris = _context.Set<NettoPri>().ToList(),
+                TotalPris = _context.Set<TotalPri>().ToList(),
+                HundredGramPris = _context.Set<HundredGramPri>().ToList()
+            };
+
+            return View(combinationModel);
         }
 
         public IActionResult Kontakt()
