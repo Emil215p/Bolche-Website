@@ -75,11 +75,11 @@ function SearchThing() {
     }
 }
 
-const uniqueColors = {};
+let uniqueColors = {};
 
 // Filter out non-unique colors
-const filteredArray = bolcheData.filter((bolche) => {
-    const color = bolche.farve;
+let filteredArray = bolcheData.filter((bolche) => {
+    let color = bolche.farve;
     if (!uniqueColors[color]) {
         uniqueColors[color] = true;
         return true; // Include the first occurrence of each color
@@ -88,9 +88,9 @@ const filteredArray = bolcheData.filter((bolche) => {
 });
 
 function populateColorOptions() {
-    const select = document.getElementById("colors");
+    let select = document.getElementById("colors");
     filteredArray.forEach((bolche) => {
-        const option = document.createElement("option");
+        let option = document.createElement("option");
         option.value = bolche.farve;
         option.text = bolche.farve;
         select.appendChild(option);
@@ -100,11 +100,11 @@ function populateColorOptions() {
 populateColorOptions();
 
 
-const uniqueBolcher = {};
+let uniqueBolcher = {};
 
 // Filter out non-unique bolcher
-const filteredArrayNames = bolcheData.filter((bolche) => {
-    const name = bolche.bolchenavn;
+let filteredArrayNames = bolcheData.filter((bolche) => {
+    let name = bolche.bolcheNavn;
     if (!uniqueBolcher[name]) {
         uniqueBolcher[name] = true;
         return true; // Include the first occurrence of each bolche
@@ -113,11 +113,11 @@ const filteredArrayNames = bolcheData.filter((bolche) => {
 });
 
 function populateBolcherOptions() {
-    const select = document.getElementById("bolchers");
+    let select = document.getElementById("bolchers");
     filteredArrayNames.forEach((bolche) => {
-        const option = document.createElement("option");
-        option.value = bolche.bolchenavn;
-        option.text = bolche.bolchenavn;
+        let option = document.createElement("option");
+        option.value = bolche.bolcheNavn;
+        option.text = bolche.bolcheNavn;
         select.appendChild(option);
     });
 }
