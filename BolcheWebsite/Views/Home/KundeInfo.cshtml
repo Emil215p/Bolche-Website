@@ -1,15 +1,35 @@
-﻿@{
+﻿@model BolcheWebsite.SQLModels.CombinationModel
+
+@{
     ViewData["Title"] = "Customer info";
 }
-<script>
-    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView))
-</script>
 
 <h1>Se info om diverse ordre. Og Kunder</h1>
-@model BolcheWebsite.SQLModels.CombinationModel
+
 <label>
     Bolcher:
-    <select name="bolchers" placeholder="Vælg Bolche" id="bolchers" onchange="SetBolche()">
+    <select name="bolcher" placeholder="Vælg Bolche" id="bolcher" onchange="SetBolche()">
         <option value="" disabled selected>Vælg Bolche</option>
     </select>
 </label>
+
+<script>
+    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView))
+    console.log(bolcheData);
+
+    console.log("Filtered Array Names:", filteredArrayNames);
+    console.log("Filtered Array Colors:", filteredArray);
+
+    if (filteredArrayNames.length === 0) {
+        console.log("Everything is fine. :)");
+    } else {
+        console.log("Oh, good, actually. :D");
+    }
+
+    if (typeof filteredArrayNames !== 'undefined' && Array.isArray(filteredArrayNames)) {
+        console.log("The array exists and is an array.");
+    } else {
+        console.log("The array does not exist or is not an array.");
+    }
+    console.log("Hello?");
+</script>

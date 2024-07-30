@@ -2,14 +2,18 @@
     ViewData["Title"] = "Birgers Bolcher";
 }
 <h1>@ViewData["Title"]</h1>
+
+@model BolcheWebsite.SQLModels.CombinationModel
+
 <script>
     var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView))
-        for (let i = 0; i < bolcheData.length; i++) {
-        console.log(bolcheData[i]);
-    }
+    console.log(bolcheData);
+    console.log("Filtered Array Names:", filteredArrayNames);
+    console.log("Filtered Array Colors:", filteredArray);
 </script>
+
 <p>Her er vores Bolche Menu</p>
-@model BolcheWebsite.SQLModels.CombinationModel
+
 <i class="lni lni-search"></i>
 <button id="SearchButton" onclick="SearchThing()">Søg</button>
 <input type="text" id="myInput" placeholder="Søg efter navn...">
@@ -17,12 +21,14 @@
 <button id="SearchForGeneralShift" onclick="SearchForGeneralShift()">Søg generelt.</button>
 <button id="toggleON" onclick="toggleON()">Vis Alle</button>
 <button id="toggleOFF" onclick="toggleOFF()">Skjul Alle</button>
+
 <label>
     Farve:
     <select name="colors" placeholder="Vælg Farve" id="colors" onchange="SetColor()">
         <option value="" disabled selected>Vælg Farve</option>
     </select>
 </label>
+
 <table id="BolcheTabel" style="display: none;">
     <thead>
         <tr>
