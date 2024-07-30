@@ -14,8 +14,12 @@
 </label>
 
 <script>
-    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView))
+    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView));
     console.log(bolcheData);
+
+    // Ensure filteredArrayNames and filteredArray are defined
+    var filteredArrayNames = filteredArrayNames || [];
+    var filteredArray = filteredArray || [];
 
     console.log("Filtered Array Names:", filteredArrayNames);
     console.log("Filtered Array Colors:", filteredArray);
