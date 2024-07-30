@@ -13,6 +13,9 @@
     </select>
 </label>
 
+<!--WIP this should be the submit button for the select.-->
+<button id="SubmitBolche" onclick="BolcheSubmit()">Søg</button>
+
 <script>
-    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView));
+    var bolcheData = @Html.Raw(Json.Serialize(Model.BolcheView))
 </script>

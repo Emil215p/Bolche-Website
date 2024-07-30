@@ -75,36 +75,41 @@ function SearchThing() {
         alert("Vælg søgekriterier eller klik på Vis alle.");
     }
 }
+// Ensure bolcheData is defined before this point
+if (typeof bolcheData == 'undefined') {
+    console.error("bolcheData is not defined");
+}
+
+
+// populate element if they exist
 if (document.getElementById("colors")) {
+
     let uniqueColors = {};
 
-    // Ensure bolcheData is defined before this point
-    if (typeof bolcheData !== 'undefined') {
-        // Filter out non-unique colors
-        let filteredArray = bolcheData.filter((bolche) => {
-            let color = bolche.farve;
-            if (!uniqueColors[color]) {
-                uniqueColors[color] = true;
-                return true; // Include the first occurrence of each color
-            }
-            return false; // Exclude subsequent occurrences
-        });
-
-        function populateColorOptions() {
-            let select = document.getElementById("colors");
-            filteredArray.forEach((bolche) => {
-                let option = document.createElement("option");
-                option.value = bolche.farve;
-                option.text = bolche.farve;
-                select.appendChild(option);
-            });
+    // Filter out non-unique colors
+    let filteredArray = bolcheData.filter((bolche) => {
+        let color = bolche.farve;
+        if (!uniqueColors[color]) {
+            uniqueColors[color] = true;
+            return true; // Include the first occurrence of each color
         }
+        return false; // Exclude subsequent occurrences
+    });
 
-        populateColorOptions();
-    } else {
-        console.error("bolcheData is not defined");
+    function populateColorOptions() {
+        let select = document.getElementById("colors");
+        filteredArray.forEach((bolche) => {
+            let option = document.createElement("option");
+            option.value = bolche.farve;
+            option.text = bolche.farve;
+            select.appendChild(option);
+        });
     }
-} else if (document.getElementById("bolcher")) {
+    populateColorOptions();
+}
+
+// populate element if they exist
+if (document.getElementById("bolcher")) {
     let uniqueBolcher = {};
 
     // Filter out non-unique bolcher
@@ -128,8 +133,23 @@ if (document.getElementById("colors")) {
     }
 
     populateBolcherOptions();
-} else {
-    console.error("bolcheData is not defined");
+}
+
+let selectedBolche;
+    function SetBolche() {
+        let input = document.getElementById("bolcher");
+        selectedBolche = input.value;
+        console.log(selectedBolche);
+        return selectedBolche;
+}
+
+
+function BolcheSubmit() {
+    if (typeof selectedBolche !== 'undefined') {
+        return console.log(selectedBolche);
+    } else {
+        alert("Select a bolche.");
+    }
 }
 
 console.log("Script Loaded.");
