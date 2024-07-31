@@ -20,8 +20,4 @@
     <PackageReference Include="System.Formats.Asn1" Version="9.0.0-preview.6.24327.7" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SQLContext\" />
-  </ItemGroup>
-
 </Project>

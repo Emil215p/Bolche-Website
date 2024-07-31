@@ -30,6 +30,10 @@ public partial class BirgerBolcherContext : DbContext
 
     public virtual DbSet<Customer> Customers { get; set; }
 
+    public virtual DbSet<CustomersWithBluePearl> CustomersWithBluePearls { get; set; }
+
+    public virtual DbSet<CustomersWithOrder> CustomersWithOrders { get; set; }
+
     public virtual DbSet<HundredGramPri> HundredGramPris { get; set; }
 
     public virtual DbSet<NettoPri> NettoPris { get; set; }
@@ -56,16 +60,16 @@ public partial class BirgerBolcherContext : DbContext
 
             entity.HasOne(d => d.Bolche).WithMany()
                 .HasForeignKey(d => d.BolcheId)
-                .HasConstraintName("FK__AssignedT__Bolch__2A4B4B5E");
+                .HasConstraintName("FK__AssignedT__Bolch__3D5E1FD2");
 
             entity.HasOne(d => d.BolcheType).WithMany()
                 .HasForeignKey(d => d.BolcheTypeId)
-                .HasConstraintName("FK__AssignedT__Bolch__2B3F6F97");
+                .HasConstraintName("FK__AssignedT__Bolch__3E52440B");
         });
 
         modelBuilder.Entity<BolcheTraitName>(entity =>
         {
-            entity.HasKey(e => e.TraitNameId).HasName("PK__BolcheTr__757A478ADB0E7043");
+            entity.HasKey(e => e.TraitNameId).HasName("PK__BolcheTr__757A478A3278BCBF");
 
             entity.Property(e => e.TraitNameId).HasColumnName("TraitNameID");
             entity.Property(e => e.TraitNames).HasMaxLength(255);
@@ -73,7 +77,7 @@ public partial class BirgerBolcherContext : DbContext
 
         modelBuilder.Entity<BolcheTyper>(entity =>
         {
-            entity.HasKey(e => e.BolcheTypeId).HasName("PK__BolcheTy__32E53EF696BF2406");
+            entity.HasKey(e => e.BolcheTypeId).HasName("PK__BolcheTy__32E53EF6ED3D6529");
 
             entity.ToTable("BolcheTyper");
 
@@ -84,7 +88,7 @@ public partial class BirgerBolcherContext : DbContext
             entity.HasOne(d => d.TraitName).WithMany(p => p.BolcheTypers)
                 .HasForeignKey(d => d.TraitNameId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BolcheTyp__Trait__267ABA7A");
+                .HasConstraintName("FK__BolcheTyp__Trait__398D8EEE");
         });
 
         modelBuilder.Entity<BolcheView>(entity =>
@@ -106,7 +110,7 @@ public partial class BirgerBolcherContext : DbContext
 
         modelBuilder.Entity<Bolcher>(entity =>
         {
-            entity.HasKey(e => e.BolcheId).HasName("PK__Bolcher__2BA201E09CA4A5B9");
+            entity.HasKey(e => e.BolcheId).HasName("PK__Bolcher__2BA201E09FE7CDB6");
 
             entity.ToTable("Bolcher");
 
@@ -118,7 +122,7 @@ public partial class BirgerBolcherContext : DbContext
 
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity.HasKey(e => e.CartId).HasName("PK__Cart__51BCD79758685016");
+            entity.HasKey(e => e.CartId).HasName("PK__Cart__51BCD79704FE745E");
 
             entity.ToTable("Cart");
 
@@ -128,14 +132,14 @@ public partial class BirgerBolcherContext : DbContext
             entity.HasOne(d => d.Bolche).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.BolcheId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Cart__BolcheID__2E1BDC42");
+                .HasConstraintName("FK__Cart__BolcheID__412EB0B6");
         });
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B82B625A14");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B89DE3DBF1");
 
-            entity.HasIndex(e => e.Phone, "UQ__Customer__5C7E359E3B262A89").IsUnique();
+            entity.HasIndex(e => e.Phone, "UQ__Customer__5C7E359E2245E20C").IsUnique();
 
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.Email).HasMaxLength(255);
@@ -146,7 +150,25 @@ public partial class BirgerBolcherContext : DbContext
 
             entity.HasOne(d => d.ShippingInfo).WithMany(p => p.Customers)
                 .HasForeignKey(d => d.ShippingInfoId)
-                .HasConstraintName("FK__Customers__Shipp__33D4B598");
+                .HasConstraintName("FK__Customers__Shipp__46E78A0C");
+        });
+
+        modelBuilder.Entity<CustomersWithBluePearl>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("CustomersWithBluePearls");
+
+            entity.Property(e => e.Name).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<CustomersWithOrder>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("CustomersWithOrders");
+
+            entity.Property(e => e.Name).HasMaxLength(255);
         });
 
         modelBuilder.Entity<HundredGramPri>(entity =>
@@ -171,7 +193,7 @@ public partial class BirgerBolcherContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF79026504");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF9BB070ED");
 
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
@@ -179,12 +201,12 @@ public partial class BirgerBolcherContext : DbContext
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.CustomerId)
-                .HasConstraintName("FK__Orders__Customer__36B12243");
+                .HasConstraintName("FK__Orders__Customer__49C3F6B7");
         });
 
         modelBuilder.Entity<OrderItem>(entity =>
         {
-            entity.HasKey(e => e.OrderItemId).HasName("PK__OrderIte__57ED06A13E6203A9");
+            entity.HasKey(e => e.OrderItemId).HasName("PK__OrderIte__57ED06A1C2C2CB12");
 
             entity.Property(e => e.OrderItemId).HasColumnName("OrderItemID");
             entity.Property(e => e.CartId).HasColumnName("CartID");
@@ -193,17 +215,17 @@ public partial class BirgerBolcherContext : DbContext
             entity.HasOne(d => d.Cart).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.CartId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrderItem__CartI__3A81B327");
+                .HasConstraintName("FK__OrderItem__CartI__4D94879B");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrderItem__Order__398D8EEE");
+                .HasConstraintName("FK__OrderItem__Order__4CA06362");
         });
 
         modelBuilder.Entity<ShippingInfo>(entity =>
         {
-            entity.HasKey(e => e.ShippingInfoId).HasName("PK__Shipping__A72E5D95187236BF");
+            entity.HasKey(e => e.ShippingInfoId).HasName("PK__Shipping__A72E5D95065F3223");
 
             entity.ToTable("ShippingInfo");
 

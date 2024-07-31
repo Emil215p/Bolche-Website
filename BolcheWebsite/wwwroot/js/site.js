@@ -143,10 +143,9 @@ let selectedBolche;
         return selectedBolche;
 }
 
-
 function BolcheSubmit() {
     if (typeof selectedBolche !== 'undefined') {
-        return console.log(selectedBolche);
+        FromSql("EXECUTE dbo.OrdersWithCustomersOnSpecific {0}", selectedBolche).ToList();
     } else {
         alert("Select a bolche.");
     }
